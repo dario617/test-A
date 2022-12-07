@@ -18,7 +18,8 @@ jobs:
       - name: log github context
         env:
           TEST: ${{github.triggering_actor}}
-        run: echo $TEST
+          TEST2: ${{github.actor}}
+        run: echo $TEST $TEST2
       - name: Run version script
         run: ./.github/scripts/generate_version.sh $GITHUB_SHA
       # This is life https://github.com/stefanzweifel/git-auto-commit-action/
