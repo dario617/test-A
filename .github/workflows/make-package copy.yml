@@ -7,13 +7,17 @@ on:
 
 jobs:
   create-version-commit:
+    # Do not trigger ourselves because of PAT 
+    # https://github.com/stefanzweifel/git-auto-commit-action/issues/237
+    if: github.triggering_actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.USER_PAT }}
       - name: Run version script
-        run: ./.github/scripts/generate_version.sh
+        run: ./.github/scripts/generate_version.sh $GITHUB_SHA
+      # This is life https://github.com/stefanzweifel/git-auto-commit-action/
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: bump-version
