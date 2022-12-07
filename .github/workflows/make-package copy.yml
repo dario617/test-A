@@ -13,7 +13,7 @@ jobs:
         with:
           token: ${{ secrets.USER_PAT }}
       - name: Run version script
-        run: ./.github/scripts/generate_version.sh
+        run: ./.github/scripts/generate_version.sh $GITHUB_SHA
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: bump-version
