@@ -15,6 +15,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.USER_PAT }}
+      - name: log github context
+        env:
+          TEST: ${{github.triggering_actor}}
+        run: echo $TEST
       - name: Run version script
         run: ./.github/scripts/generate_version.sh $GITHUB_SHA
       # This is life https://github.com/stefanzweifel/git-auto-commit-action/
